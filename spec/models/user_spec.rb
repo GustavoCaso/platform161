@@ -55,4 +55,33 @@ describe User do
       }.to change(Message, :count).by(-3)
     end
   end
+
+  context 'Relationships' do
+    let(:user) { create(:user, :with_password) }
+    context 'Following' do
+      it 'will create a active relationship' do
+        john = create(:user, :with_password, user_name: 'John')
+        expect{
+          user.create_following_relationship(john)
+        }.to change(Relationship, :count).by(1)
+        expect(user.following?(john)).to be_truthy
+      end
+
+      it 'will destroy a active relationship' do
+        john = create(:user, :with_password, user_name: 'John')
+        user.create_following_relationship(john)
+        expect{
+          user.destroy_following_relationship(john)
+        }.to change(Relationship, :count).by(-1)
+        expect(user.following?(john)).to be_falsy
+      end
+    end
+    context 'Followers' do
+      let(:user_2) { create(:user, :with_password) }
+      before { user_2.create_following_relationship(user) }
+      it 'will give a list of followers' do
+        expect(user.followers).to eq [user_2]
+      end
+    end
+  end
 end
