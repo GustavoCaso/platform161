@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  # With the dependent option we avoid having messages without user, if it
+  # decide to, leave our awesome social network :(
+  has_many :messages, dependent: :destroy
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
   validates :email, :user_name, presence: true, uniqueness: true

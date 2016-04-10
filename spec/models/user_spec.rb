@@ -43,4 +43,16 @@ describe User do
       expect(user.email).to eq 'HELLO@GMAIL.COM'
     end
   end
+
+  context 'Messages' do
+    it 'delete all messages related to removed user' do
+      user = create(:user, :with_password)
+      3.times do
+        create(:message, user: user)
+      end
+      expect {
+        user.destroy
+      }.to change(Message, :count).by(-3)
+    end
+  end
 end
