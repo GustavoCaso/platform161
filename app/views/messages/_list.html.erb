@@ -1,0 +1,10 @@
+<% if messages.any? %>
+  <ul class="message-list">
+    <% messages.each do |message| %>
+      <li class="message-list-item"><%= message.content %> (<%=message.created_at%>)</li>
+      <br>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No messages publish, What are you waiting for, expread your word :)</p>
+<% end %>

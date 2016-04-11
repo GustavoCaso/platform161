@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+      <% if @users.any? %>
+        <ul class="list-group" id="contact-list">
+          <% @users.each_with_index do |user, index| %>
+            <%= render partial: 'user', locals: { user: user } %>
+          <% end %>
+        </ul>
+      <% else %>
+          <p>There are no users please create an account and try bring new people :)</p>
+      <% end %>
+    </div>
+  </div>
+</div>

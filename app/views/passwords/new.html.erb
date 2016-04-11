@@ -1,0 +1,27 @@
+<h1>Account Settings</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@password_form, url: passwords_path(@password_form)) do |f| %>
+      <% if @password_form.errors.full_messages.any? %>
+        <div class="alert alert-danger" role="alert">
+          <ul>
+            <% @password_form.errors.full_messages.each do |error_message| %>
+              <li><%= error_message%></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= f.label :original_password %>
+      <%= f.password_field :original_password, class: 'form-control' %>
+
+      <%= f.label :new_password %>
+      <%= f.password_field :new_password, class: 'form-control' %>
+
+      <%= f.label :new_password_confirmation %>
+      <%= f.password_field :new_password_confirmation, class: 'form-control' %>
+
+      <%= f.submit "Change Password", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<% if @users.any? %>
+  <ul class="list-group" id="contact-list">
+    <% @users.each_with_index do |user, index| %>
+      <%= render partial: 'user', locals: { user: user, index: index + 1 } %>
+    <% end %>
+  </ul>
+<% else %>
+    <p>You have no Followers :( try creating interesting messages</p>
+<% end %>

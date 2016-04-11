@@ -1,0 +1,12 @@
+<li class="list-group-item clearfix">
+  <div class="col-xs-12 col-sm-3">
+    <%= link_to user_path(user), class: "img-responsive img-circle" do %>
+      <%= gravatar_for(user) %>
+    <%end %>
+  </div>
+  <div class="col-xs-12 col-sm-9">
+    <span class="name"><%= user.user_name %></span><br/>
+    <p>Messages: <%= user.messages.count %></p>
+    <%= render partial: 'following_buttons', locals: { user: user } %>
+    <%= render partial: 'following_stats', locals: { user: user } %>
+</li>
